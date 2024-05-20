@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        currentCamera = TPS;
+        currentCamera = FPS;
         currentCamera.gameObject.SetActive(true);
     }
     void Update()

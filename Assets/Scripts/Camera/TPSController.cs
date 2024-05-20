@@ -19,7 +19,7 @@ public class TPSController : MonoBehaviour
     void Update()
     {
         MouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-        
+
         RotatePlayer();
     }
 
@@ -36,9 +36,10 @@ public class TPSController : MonoBehaviour
 
         //align with player
         Quaternion rotation = Quaternion.Euler(MouseInput.x, 0, 0);
-        Vector3 position = playerTransform.position - rotation * Vector3.forward * offSet.z;
+        Vector3 position = playerTransform.position + rotation * Vector3.forward * offSet.z;
+        position.x = playerTransform.position.x + offSet.x;
         position.y = playerTransform.position.y + offSet.y;
-        transform.localPosition = Vector3.Lerp(transform.position, position, 0.5f) ;
+        transform.position = Vector3.Lerp(transform.position, position, 0.5f) ;
 
         
     }

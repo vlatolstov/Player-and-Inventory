@@ -12,7 +12,10 @@ public class FPSController : MonoBehaviour
 
     private Vector2 MouseInput;
     private float xRot;
-
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
     void Update()
     {
         MouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
