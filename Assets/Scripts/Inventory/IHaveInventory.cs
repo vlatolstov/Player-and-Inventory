@@ -8,6 +8,5 @@ public interface IHaveInventory
 
     void OpenInventory()
     {
-        int i = 1;
     }
 }

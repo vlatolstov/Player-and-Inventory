@@ -19,7 +19,6 @@ public class FPSController : MonoBehaviour
     void Update()
     {
         MouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-        RotatePlayer();
     }
 
     private void LateUpdate()
@@ -36,10 +35,5 @@ public class FPSController : MonoBehaviour
 
         //align with player
         transform.localPosition = new Vector3(playerTransform.position.x, playerTransform.position.y + 1.73f, playerTransform.position.z);
-    }
-
-    private void RotatePlayer()
-    {
-        playerTransform.transform.Rotate(0, MouseInput.x * MouseSensitivity, 0);
     }
 }

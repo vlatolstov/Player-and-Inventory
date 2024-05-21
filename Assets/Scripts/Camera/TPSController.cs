@@ -20,7 +20,6 @@ public class TPSController : MonoBehaviour
     {
         MouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
-        RotatePlayer();
     }
 
     private void LateUpdate()
@@ -42,10 +41,5 @@ public class TPSController : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, position, 0.5f) ;
 
         
-    }
-
-    private void RotatePlayer()
-    {
-        playerTransform.Rotate(0, MouseInput.x * MouseSensitivity, 0);
     }
 }
