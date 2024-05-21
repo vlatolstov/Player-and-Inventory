@@ -5,24 +5,46 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    
     [SerializeField] private float _mouseSense;
-    [SerializeField] private float _horizontalInput;
-    [SerializeField] private float _verticalInput;
-    [SerializeField] private float _mouseXInput;
-    [SerializeField] private float _mouseYInput;
+
+    private float _horizontal;
+    private float _vertical;
+    private float _mouseX;
+    private float _mouseY;
+
+    private Plane _worldPlane = new(Vector3.up, Vector3.zero);
+    private Vector3 _forwardDirection;
+    private Vector3 _rightDirection;
 
     public float MouseSensitivity => _mouseSense;
-    public float HorizontalInput => _horizontalInput;
-    public float VerticalInput => _verticalInput;
-    public float MouseXInput => _mouseXInput;
-    public float MouseYInput => _mouseYInput;
+    public float Horizontal => _horizontal;
+    public float Vertical => _vertical;
+    public float MouseX => _mouseX;
+    public float MouseY => _mouseY;
+    public Vector3 ForwardDirection => _forwardDirection;
+    public Vector3 RightDirection => _rightDirection;
+
+
+
+
 
     void Update()
     {
-        _horizontalInput = Input.GetAxis("Horizontal");
-        _verticalInput = Input.GetAxis("Vertical");
-        _mouseXInput = Input.GetAxis("Mouse X") * _mouseSense;
-        _mouseYInput = Input.GetAxis("Mouse Y") * _mouseSense;
+        _horizontal = Input.GetAxis("Horizontal");
+        _vertical = Input.GetAxis("Vertical");
+        _mouseX = Input.GetAxis("Mouse X");
+        _mouseY = Input.GetAxis("Mouse Y");
+    }
+
+    //sets the camera relative directions for further using in movement
+    public void SetDirections(Transform cameraTransform)
+    {
+        Vector3 cameraForward = Vector3.ProjectOnPlane(cameraTransform.forward, _worldPlane.normal).normalized;
+        Vector3 cameraRight = Vector3.ProjectOnPlane(cameraTransform.right, _worldPlane.normal).normalized;
+
+        _forwardDirection = cameraForward;
+        _rightDirection = cameraRight;
     }
 }
 

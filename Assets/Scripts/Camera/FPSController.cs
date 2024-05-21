@@ -4,36 +4,44 @@ using UnityEngine;
 
 public class FPSController : MonoBehaviour
 {
-    
+
     [SerializeField] private Transform playerTransform;
-    [SerializeField] private float MouseSensitivity;
     [Tooltip("Bounds of camera rotation in Y axis.")]
     [SerializeField] private float yBoundDegrees;
+    private InputManager _input;
+    private float xRotation;
+    private float yRotation;
 
-    private Vector2 MouseInput;
-    private float xRot;
     private void Start()
     {
+        _input = FindObjectOfType<InputManager>();
         Cursor.lockState = CursorLockMode.Locked;
     }
     void Update()
     {
-        MouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+        _input.SetDirections(transform);
     }
 
     private void LateUpdate()
     {
-        MoveCamera();
+        RotateCamera();
+        KeepPosition();
     }
 
-    private void MoveCamera()
+    private void RotateCamera()
     {
-        //mouse rotation
-        xRot -= MouseInput.y * MouseSensitivity;
-        xRot = Mathf.Clamp(xRot, -yBoundDegrees, yBoundDegrees);
-        transform.localRotation = Quaternion.Euler(xRot, playerTransform.localRotation.eulerAngles.y, 0);
+        xRotation -= _input.MouseY * _input.MouseSensitivity;
+        xRotation = Mathf.Clamp(xRotation, -yBoundDegrees, yBoundDegrees);
+        yRotation += _input.MouseX * _input.MouseSensitivity;
 
-        //align with player
-        transform.localPosition = new Vector3(playerTransform.position.x, playerTransform.position.y + 1.73f, playerTransform.position.z);
+        Quaternion rotation = Quaternion.Euler(xRotation, yRotation, 0);
+        transform.rotation = rotation;
+    }
+    //align with player
+    private void KeepPosition()
+    {
+        transform.localPosition =
+            new Vector3
+            (playerTransform.position.x, playerTransform.position.y + 1.73f, playerTransform.position.z);
     }
 }

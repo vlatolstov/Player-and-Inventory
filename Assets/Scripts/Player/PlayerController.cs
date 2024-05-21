@@ -4,63 +4,44 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
-
-    [SerializeField] private float movemetSpeed;
-    [SerializeField] private float jumpForce;
+    [SerializeField] private float _movementSpeed;
+    [SerializeField] private float _jumpForce;
     [Space]
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private Transform feetTransform;
     [SerializeField] private Rigidbody playerRigidbody;
-    [SerializeField] private Camera FPS;
-    [SerializeField] private Camera TPS;
 
-    private Vector3 movementInput;
-    private Camera currentCamera;
+    private InputManager _input;
 
     private void Start()
     {
-        currentCamera = FPS;
-        currentCamera.gameObject.SetActive(true);
+        _input = FindObjectOfType<InputManager>();
     }
+
+    private void FixedUpdate()
+    {
+        MovePlayer();
+    }
+
+
     void Update()
     {
-        movementInput = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
-
-        MovePlayer();
-
         if (Input.GetKeyDown(KeyCode.Space)) Jump();
-
-        if (Input.GetKeyDown(KeyCode.Tab)) ChangeCamera();
     }
 
     private void MovePlayer()
     {
-        Vector3 movementVector = Vector3.ClampMagnitude(transform.TransformDirection(movementInput), 1f) * movemetSpeed;
-        playerRigidbody.velocity = new Vector3(movementVector.x, playerRigidbody.velocity.y, movementVector.z);
+        Vector3 movementVector = _input.RightDirection * _input.Horizontal 
+            +_input.ForwardDirection * _input.Vertical;
+        Debug.Log($"Movement vector: {movementVector}");
+        playerRigidbody.velocity = movementVector * _movementSpeed;
     }
 
     private void Jump()
     {
         if (Physics.CheckSphere(feetTransform.position, 0.1f, groundMask))
         {
-            playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        }
-    }
-
-    private void ChangeCamera()
-    {
-        if (currentCamera == FPS)
-        {
-            FPS.gameObject.SetActive(false);
-            TPS.gameObject.SetActive(true);
-            currentCamera = TPS;
-        }
-        else
-        {
-            TPS.gameObject.SetActive(false);
-            FPS.gameObject.SetActive(true);
-            currentCamera = FPS;
+            playerRigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
         }
     }
 }
