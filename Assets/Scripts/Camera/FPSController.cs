@@ -30,7 +30,7 @@ public class FPSController : MonoBehaviour
     {
         RotateCamera();
         KeepPosition();
-    }
+    }///
 
     private void RotateCamera()
     {
