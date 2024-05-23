@@ -34,18 +34,16 @@ public class FPSController : MonoBehaviour
 
     private void RotateCamera()
     {
-        xRotation -= _input.MouseY * _input.MouseSensitivity;
-        xRotation = Mathf.Clamp(xRotation, -yBoundDegrees, yBoundDegrees);
-        yRotation += _input.MouseX * _input.MouseSensitivity;
+        xRotation += _input.MouseX * _input.MouseSensitivity;
+        yRotation -= _input.MouseY * _input.MouseSensitivity;
+        yRotation = Mathf.Clamp(yRotation, -yBoundDegrees, yBoundDegrees);
+        Vector3 rotationEuler = new(yRotation, xRotation, 0);
 
-        Quaternion rotation = Quaternion.Euler(xRotation, yRotation, 0);
-        transform.rotation = rotation;
+        transform.eulerAngles = rotationEuler;
     }
-    //align with player
+
     private void KeepPosition()
     {
         transform.position = _playerTransform.position;
-            //new Vector3
-            //(playerTransform.position.x, playerTransform.position.y + 1.73f, playerTransform.position.z);
     }
 }
