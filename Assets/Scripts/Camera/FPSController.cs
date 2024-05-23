@@ -19,8 +19,6 @@ public class FPSController : MonoBehaviour
     }
     void Update()
     {
-        //from camerafix
-        //from master
         _input.SetDirections(transform);
     }
 
@@ -32,7 +30,7 @@ public class FPSController : MonoBehaviour
     {
         RotateCamera();
         KeepPosition();
-    }///
+    }
 
     private void RotateCamera()
     {
