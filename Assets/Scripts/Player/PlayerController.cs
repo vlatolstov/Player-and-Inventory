@@ -31,8 +31,8 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayer()
     {
-        Vector3 movementVector = (_input.RightDirection * _input.Horizontal 
-            +_input.ForwardDirection * _input.Vertical).normalized;
+        Vector3 movementVector = Vector3.ClampMagnitude(_input.RightDirection * _input.Horizontal
+            + _input.ForwardDirection * _input.Vertical, 1);
         playerRigidbody.velocity = movementVector * _movementSpeed;
     }
 
