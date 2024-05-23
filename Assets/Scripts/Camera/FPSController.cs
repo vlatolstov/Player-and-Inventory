@@ -7,10 +7,10 @@ public class FPSController : MonoBehaviour
 
     [SerializeField] private Transform _playerTransform;
     [Tooltip("Bounds of camera rotation in Y axis.")]
-    [SerializeField] private float yBoundDegrees;
+    [SerializeField] private float _yBoundDegrees;
     private InputManager _input;
-    private float xRotation;
-    private float yRotation;
+    private float _xRotation;
+    private float _yRotation;
 
     private void Start()
     {
@@ -34,16 +34,17 @@ public class FPSController : MonoBehaviour
 
     private void RotateCamera()
     {
-        xRotation += _input.MouseX * _input.MouseSensitivity;
-        yRotation -= _input.MouseY * _input.MouseSensitivity;
-        yRotation = Mathf.Clamp(yRotation, -yBoundDegrees, yBoundDegrees);
-        Vector3 rotationEuler = new(yRotation, xRotation, 0);
+        _xRotation += _input.MouseX * _input.MouseSensitivity * Time.deltaTime;
+        _yRotation -= _input.MouseY * _input.MouseSensitivity * Time.deltaTime;
+        _yRotation = Mathf.Clamp(_yRotation, -_yBoundDegrees, _yBoundDegrees);
+        Vector3 rotationChange = new(_yRotation, _xRotation, 0);
+        Quaternion rotation = Quaternion.Euler(rotationChange);
 
-        transform.eulerAngles = rotationEuler;
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, .4f);
     }
 
     private void KeepPosition()
     {
-        transform.position = _playerTransform.position;
+        transform.position = Vector3.Lerp(transform.position, _playerTransform.position, .7f);
     }
 }
