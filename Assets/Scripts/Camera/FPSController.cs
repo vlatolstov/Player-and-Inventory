@@ -5,7 +5,7 @@ using UnityEngine;
 public class FPSController : MonoBehaviour
 {
 
-    [SerializeField] private Transform playerTransform;
+    [SerializeField] private Transform _playerTransform;
     [Tooltip("Bounds of camera rotation in Y axis.")]
     [SerializeField] private float yBoundDegrees;
     private InputManager _input;
@@ -22,6 +22,10 @@ public class FPSController : MonoBehaviour
         _input.SetDirections(transform);
     }
 
+    private void FixedUpdate()
+    {
+        
+    }
     private void LateUpdate()
     {
         RotateCamera();
@@ -40,8 +44,8 @@ public class FPSController : MonoBehaviour
     //align with player
     private void KeepPosition()
     {
-        transform.localPosition =
-            new Vector3
-            (playerTransform.position.x, playerTransform.position.y + 1.73f, playerTransform.position.z);
+        transform.position = _playerTransform.position;
+            //new Vector3
+            //(playerTransform.position.x, playerTransform.position.y + 1.73f, playerTransform.position.z);
     }
 }

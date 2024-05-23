@@ -31,9 +31,8 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayer()
     {
-        Vector3 movementVector = _input.RightDirection * _input.Horizontal 
-            +_input.ForwardDirection * _input.Vertical;
-        Debug.Log($"Movement vector: {movementVector}");
+        Vector3 movementVector = (_input.RightDirection * _input.Horizontal 
+            +_input.ForwardDirection * _input.Vertical).normalized;
         playerRigidbody.velocity = movementVector * _movementSpeed;
     }
 
