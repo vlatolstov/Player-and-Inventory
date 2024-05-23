@@ -19,6 +19,7 @@ public class FPSController : MonoBehaviour
     }
     void Update()
     {
+        //from master
         _input.SetDirections(transform);
     }
 
