@@ -50,8 +50,11 @@ public class PlayerController : MonoBehaviour
     ///remove later
     private void Action()
     {
-        IPickable target = _cameraRaycast.Hit.collider as IPickable;
-        target.Deactivate();
+        if (_cameraRaycast.Hit.collider.TryGetComponent<Item>(out Item item))
+        {
+            item.Deactivate();
+        }
+        
         //var target = _cameraRaycast.Hit.collider.gameObject;
         //target.SetActive(false);
     }
