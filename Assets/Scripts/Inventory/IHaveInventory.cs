@@ -4,9 +4,5 @@ using UnityEngine;
 
 public interface IHaveInventory 
 {
-    int Capacity { get; set; }
-
-    void OpenInventory()
-    {
-    }
+    
 }

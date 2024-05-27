@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Inventory))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float _movementSpeed;
@@ -13,11 +14,13 @@ public class PlayerController : MonoBehaviour
 
     private InputManager _input;
     private ViewRaycast _cameraRaycast;
+    private Inventory _inventory;
 
     private void Start()
     {
         _input = FindObjectOfType<InputManager>();
         _cameraRaycast = Camera.main.GetComponent<ViewRaycast>();
+        _inventory = GetComponent<Inventory>();
     }
 
     private void FixedUpdate()
@@ -30,6 +33,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space)) Jump();
         if (Input.GetKeyDown(KeyCode.E)) Action();
+        if (Input.GetKeyDown(KeyCode.I)) _inventory.ShowInventory();
     }
 
     private void MovePlayer()
@@ -47,16 +51,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    ///remove later
     private void Action()
     {
         if (_cameraRaycast.Hit.collider.TryGetComponent<Item>(out Item item))
         {
-            item.Deactivate();
+            item.PickUp(_inventory);
         }
-        
-        //var target = _cameraRaycast.Hit.collider.gameObject;
-        //target.SetActive(false);
     }
-
 }

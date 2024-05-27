@@ -1,22 +1,30 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Item : MonoBehaviour, IPickable
 {
-    public void Deactivate()
+    public string itemName;
+    public ItemType type;
+    public float weight;
+    public bool stackable;
+    public  int maxStack;
+    public int count;
+    public void PickUp(Inventory inv)
     {
         gameObject.SetActive(false);
+        inv.AddItem(this);
     }
 
-    void Start()
+    public override string ToString()
     {
-        
+        return $"{count} {itemName}";
     }
-
-   
-    void Update()
+    public enum ItemType
     {
-        
+        Money,
+        Armor,
+        NaO
     }
 }

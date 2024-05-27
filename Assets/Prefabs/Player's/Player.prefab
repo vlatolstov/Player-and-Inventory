@@ -4857,6 +4857,7 @@ GameObject:
   - component: {fileID: 4142761432553432922}
   - component: {fileID: 6647281135497925860}
   - component: {fileID: 1939335778400968813}
+  - component: {fileID: 5265804631504251093}
   - component: {fileID: 2936544628245329743}
   - component: {fileID: 8393135158415910716}
   m_Layer: 0
@@ -4944,15 +4945,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1be86b9df09e5434e962c77a2265d86c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movemetSpeed: 6
-  jumpForce: 300
+  _movementSpeed: 0
+  _jumpForce: 0
   groundMask:
     serializedVersion: 2
     m_Bits: 8
   feetTransform: {fileID: 5185511176119192233}
   playerRigidbody: {fileID: 6647281135497925860}
-  FPS: {fileID: 0}
-  TPS: {fileID: 0}
+--- !u!114 &5265804631504251093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7462606378859560266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a2db12ee7c65bb4995084f8c36d8b71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!81 &2936544628245329743
 AudioListener:
   m_ObjectHideFlags: 0

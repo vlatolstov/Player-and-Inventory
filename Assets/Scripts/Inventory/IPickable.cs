@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IPickable
 {
-    void Deactivate();
+    void PickUp(Inventory inv);
 }
