@@ -12,10 +12,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody playerRigidbody;
 
     private InputManager _input;
+    private ViewRaycast _cameraRaycast;
 
     private void Start()
     {
         _input = FindObjectOfType<InputManager>();
+        _cameraRaycast = Camera.main.GetComponent<ViewRaycast>();
     }
 
     private void FixedUpdate()
@@ -27,6 +29,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space)) Jump();
+        if (Input.GetKeyDown(KeyCode.E)) Action();
     }
 
     private void MovePlayer()
@@ -43,4 +46,14 @@ public class PlayerController : MonoBehaviour
             playerRigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
         }
     }
+
+    ///remove later
+    private void Action()
+    {
+        IPickable target = _cameraRaycast.Hit.collider as IPickable;
+        target.Deactivate();
+        //var target = _cameraRaycast.Hit.collider.gameObject;
+        //target.SetActive(false);
+    }
+
 }
