@@ -28,10 +28,4 @@ public class Item : MonoBehaviour, IPickable
     {
         return $"{Count} {ItemName}";
     }
-    public enum ItemType
-    {
-        Money,
-        Armor,
-        NaO
-    }
 }

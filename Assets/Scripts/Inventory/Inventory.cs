@@ -26,11 +26,11 @@ public class Inventory : MonoBehaviour
     {
         switch (item.Type)
         {
-            case Item.ItemType.Money:
+            case ItemType.Money:
                 _money += item.Count;
                 ShowLog();
                 break;
-            case Item.ItemType.Armor:
+            case ItemType.Armor:
                 if (CheckWeight())
                 {
                     _items.Add(item);
