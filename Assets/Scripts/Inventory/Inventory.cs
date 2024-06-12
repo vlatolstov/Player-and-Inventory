@@ -5,42 +5,47 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    [SerializeField] private GameObject m_inventoryWindow;
     private float _maxWeight = 100;
     private float _curWeight = 0;
     private long _money = 0;
     private List<Item> _items = new();
+    private bool m_isOpened = false;
+    
 
     //temporary method
     public void ShowInventory()
     {
         Debug.Log($"You have {_items.Count} items. You have {_money} gold. Weight {_curWeight}/{_maxWeight}." +
             $"Item List: {String.Join(", ", _items)}");
+        m_isOpened = !m_isOpened;
+        m_inventoryWindow.SetActive(m_isOpened);
     }
 
     public void AddItem(Item item)
     {
-        switch (item.type)
+        switch (item.Type)
         {
             case Item.ItemType.Money:
-                _money += item.count;
+                _money += item.Count;
                 ShowLog();
                 break;
             case Item.ItemType.Armor:
                 if (CheckWeight())
                 {
                     _items.Add(item);
-                    _curWeight += item.weight;
+                    _curWeight += item.Weight;
                     ShowLog();
                 }
                 break;
             default:
-                Debug.LogError($"{item.type} not implemented!");
+                Debug.LogError($"{item.Type} not implemented!");
                 break;
         }
 
         //pick information
-        void ShowLog() => Debug.Log($"Picked {item.count} {item.itemName}{(item.count == 1 ? "" : "'s")}.");
+        void ShowLog() => Debug.Log($"Picked {item.Count} {item.ItemName}{(item.Count == 1 ? "" : "'s")}.");
 
-        bool CheckWeight() => _curWeight + item.weight <= _maxWeight;
+        bool CheckWeight() => _curWeight + item.Weight <= _maxWeight;
     }
 }
