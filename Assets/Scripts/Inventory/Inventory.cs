@@ -16,7 +16,7 @@ public class Inventory : MonoBehaviour
     //temporary method
     public void ShowInventory()
     {
-        Debug.Log($"You have {_items.Count} items. You have {_money} gold. Weight {_curWeight}/{_maxWeight}." +
+        Debug.Log($"You have {_items.Count} slots with items. You have {_money} gold. Weight {_curWeight}/{_maxWeight}." +
             $"Item List: {String.Join(", ", _items)}");
         m_isOpened = !m_isOpened;
         m_inventoryWindow.SetActive(m_isOpened);
