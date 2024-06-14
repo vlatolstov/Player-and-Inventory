@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
@@ -9,9 +10,9 @@ public class Inventory : MonoBehaviour
     private float _maxWeight = 100;
     private float _curWeight = 0;
     private long _money = 0;
-    private List<AbstractItemInfo> _items = new();
+    private List<(AbstractItemInfo, int)> _items = new();
     private bool m_isOpened = false;
-    
+
 
     //temporary method
     public void ShowInventory()
@@ -22,29 +23,49 @@ public class Inventory : MonoBehaviour
         m_inventoryWindow.SetActive(m_isOpened);
     }
 
-    public void AddItem(AbstractItemInfo item)
+    public bool AddItem(AbstractItemInfo info, int count)
     {
-        switch (item.Type)
+        float weight = info.Weight * count;
+        if (_curWeight + weight <= _maxWeight)
         {
-            case ItemType.Money:
-                _money += item.Count;
-                ShowLog();
-                break;
-            case ItemType.Armor:
-                if (CheckWeight())
-                {
-                    _items.Add(item);
-                    _curWeight += item.Weight;
-                    ShowLog();
-                }
-                break;
-            default:
-                Debug.LogError($"{item.Type} not implemented!");
-                break;
+            _curWeight += weight;
+            switch (info.Type)
+            {
+                case ItemType.Money:
+                    _money += count;
+                    Debug.Log($"Picked {count} {info.ItemName}{(count == 1 ? "" : "s")}.");
+                    break;
+                case ItemType.Armor:
+                    ArmorInfo armor = info as ArmorInfo;
+                    _items.Add((armor, count));
+                    Debug.Log($"Picked {armor.ItemName} with {armor.ArmorClass} AC and {armor.ArmorType} type.");
+                    break;
+                case ItemType.Miscellaneous:
+                    OtherItemInfo item = info as OtherItemInfo;
+
+                    if (item.Stackable)
+                    {
+                        
+                    }
+                    else
+                    {
+                        for (int i = 0; i < count; i++)
+                        {
+                            _items.Add((item, 1));
+                        }
+                    }
+                    Debug.Log($"Picked {count} {info.ItemName}{(count == 1 ? "" : "s")}.");
+                    break;
+                default:
+                    Debug.LogError($"{info.Type} not implemented!");
+                    return false;
+            }
+            return true;
         }
-
-        void ShowLog() => Debug.Log($"Picked {item.Count} {item.ItemName}{(item.Count == 1 ? "" : "'s")}.");
-
-        bool CheckWeight() => _curWeight + item.Weight <= _maxWeight;
+        else
+        {
+            Debug.LogWarning("Cant pickup! Too heavy!");
+            return false;
+        }
     }
 }

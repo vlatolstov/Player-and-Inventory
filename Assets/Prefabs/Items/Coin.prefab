@@ -121,3 +121,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _info: {fileID: 11400000, guid: fffa027e6569e244c8252ce48e1e0841, type: 2}
+  _count: 1
