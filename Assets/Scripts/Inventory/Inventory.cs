@@ -1,8 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
@@ -37,15 +36,14 @@ public class Inventory : MonoBehaviour
                     break;
                 case ItemType.Armor:
                     ArmorInfo armor = info as ArmorInfo;
-                    _items.Add((armor, count));
+                    _items.Add((armor, 1));
                     Debug.Log($"Picked {armor.ItemName} with {armor.ArmorClass} AC and {armor.ArmorType} type.");
                     break;
                 case ItemType.Miscellaneous:
                     OtherItemInfo item = info as OtherItemInfo;
-
                     if (item.Stackable)
                     {
-                        
+                        FillUpInventoryWithSameItem(count, item);
                     }
                     else
                     {
@@ -56,6 +54,7 @@ public class Inventory : MonoBehaviour
                     }
                     Debug.Log($"Picked {count} {info.ItemName}{(count == 1 ? "" : "s")}.");
                     break;
+
                 default:
                     Debug.LogError($"{info.Type} not implemented!");
                     return false;
@@ -66,6 +65,56 @@ public class Inventory : MonoBehaviour
         {
             Debug.LogWarning("Cant pickup! Too heavy!");
             return false;
+        }
+    }
+
+    private IList<(int, int)> HaveSameIDAndAppropriateCount(OtherItemInfo item)
+    {
+        return _items
+            .Select((kvp, index) => (kvp.Item1.ID, count: kvp.Item2, index))
+            .Where(triple => triple.ID == item.ID && triple.count < item.MaxStack)
+            .Select(triple => (triple.count, triple.index))
+            .ToList();
+    }
+    private void FillUpInventoryWithSameItem(int count, OtherItemInfo type)
+    {
+        var selected = HaveSameIDAndAppropriateCount(type);
+        if (selected.Any())
+        {
+            foreach (var elem in selected)
+            {
+                int canFit = type.MaxStack - elem.Item1;
+                if (canFit >= count)
+                {
+                    _items[elem.Item2] = (type, count + elem.Item1);
+                    return;
+                }
+                else
+                {
+                    count -= canFit;
+                    _items[elem.Item2] = (type, canFit + elem.Item1);
+                }
+            }
+            if (count > 0)
+            {
+                int n = count / type.MaxStack;
+                for (int i = 0; i < n; i++)
+                {
+                    _items.Add((type, type.MaxStack));
+                }
+                int mod = count % type.MaxStack;
+                if (mod > 0) _items.Add((type, mod));
+            }
+        }
+        else
+        {
+            int n = count / type.MaxStack;
+            for (int i = 0; i < n; i++)
+            {
+                _items.Add((type, type.MaxStack));
+            }
+            int mod = count % type.MaxStack;
+            if (mod > 0) _items.Add((type, mod));
         }
     }
 }
