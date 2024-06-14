@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
     private void Action()
     {
-        if (_cameraRaycast.Hit.collider.TryGetComponent<Item>(out Item item))
+        if (_cameraRaycast.Hit.collider.TryGetComponent<PlacedItem>(out PlacedItem item))
         {
             item.PickUp(_inventory);
         }

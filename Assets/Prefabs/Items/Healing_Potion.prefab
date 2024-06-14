@@ -291,6 +291,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3339075857740107255}
   - component: {fileID: 6320334716579409776}
+  - component: {fileID: 5429377829699485980}
   m_Layer: 0
   m_Name: Healing_Potion
   m_TagString: Untagged
@@ -337,3 +338,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.8163252, y: 2.0048068, z: 1.8013525}
   m_Center: {x: -0.011231899, y: -0.0031210484, z: -0.0037455559}
+--- !u!114 &5429377829699485980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8990857960684620071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 168c4c85c04881646abe8ae56ef41b2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _info: {fileID: 11400000, guid: ba69298b41fe22b43b32635237104bb9, type: 2}

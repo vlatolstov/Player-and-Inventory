@@ -17,6 +17,7 @@ MonoBehaviour:
   _name: Coin
   _description: Golden coin.
   _weight: 0
+  _count: 1
   _image: {fileID: 0}
   _placeableGO: {fileID: 8176852813297535129, guid: 1b4de3a3705a30f4fab86728543a283c, type: 3}
   _stackable: 0

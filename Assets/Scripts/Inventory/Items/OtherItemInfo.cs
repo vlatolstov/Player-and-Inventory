@@ -10,5 +10,4 @@ public class OtherItemInfo : AbstractItemInfo
     [Range(0, 1000)]
     [SerializeField] private int _maxStack;
     public int MaxStack { get => _maxStack; }
-    public int Count { get; private set; }
 }

@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
     private float _maxWeight = 100;
     private float _curWeight = 0;
     private long _money = 0;
-    private List<Item> _items = new();
+    private List<AbstractItemInfo> _items = new();
     private bool m_isOpened = false;
     
 
@@ -22,7 +22,7 @@ public class Inventory : MonoBehaviour
         m_inventoryWindow.SetActive(m_isOpened);
     }
 
-    public void AddItem(Item item)
+    public void AddItem(AbstractItemInfo item)
     {
         switch (item.Type)
         {
@@ -43,7 +43,6 @@ public class Inventory : MonoBehaviour
                 break;
         }
 
-        //pick information
         void ShowLog() => Debug.Log($"Picked {item.Count} {item.ItemName}{(item.Count == 1 ? "" : "'s")}.");
 
         bool CheckWeight() => _curWeight + item.Weight <= _maxWeight;

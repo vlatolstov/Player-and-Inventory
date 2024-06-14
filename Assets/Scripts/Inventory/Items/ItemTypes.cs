@@ -1,7 +1,7 @@
 public enum ItemType
 {
-    Money,
-    Armor,
-    Miscellaneous,
-    NaO
+    Money = 0,
+    Armor = 1,
+    Miscellaneous = 2,
+    NaO = 3
 }

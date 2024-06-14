@@ -2053,6 +2053,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2340394704162144254}
   - component: {fileID: 1437748461408267680}
+  - component: {fileID: -2768012044009640205}
   m_Layer: 0
   m_Name: Armor_Of_The_Dead
   m_TagString: Untagged
@@ -2098,6 +2099,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.69732475, y: 0.7625164, z: 0.42193532}
   m_Center: {x: -0.006984815, y: 0.16065067, z: -0.014296442}
+--- !u!114 &-2768012044009640205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8754752899074070216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 168c4c85c04881646abe8ae56ef41b2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _info: {fileID: 11400000, guid: e1882c326abca9542a359bee0bab1c0a, type: 2}
 --- !u!1 &9111884908428498340
 GameObject:
   m_ObjectHideFlags: 0
