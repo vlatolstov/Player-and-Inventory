@@ -26,13 +26,6 @@ public class ItemDatabase : MonoBehaviour
         }
     }
 
-    public static void ShowDatabase()
-    {
-        Debug.Log("Database contains:");
-        int i = 1;
-        foreach (var item in m_itemDatabase.Values)
-        {
-            Debug.Log($"¹{i++} {item.name}. ID {item.ID}");
-        }
-    }
+    public static void ShowDatabase() => Debug.Log($"Database contains {m_itemDatabase.Count} items:\n" + String.Join("\n", m_itemDatabase));
+
 }

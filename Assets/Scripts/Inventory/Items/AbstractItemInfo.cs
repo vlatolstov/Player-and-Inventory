@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public abstract class AbstractItemInfo : ScriptableObject
 {
@@ -17,6 +19,8 @@ public abstract class AbstractItemInfo : ScriptableObject
     [SerializeField] private float _weight;
     public float Weight { get => _weight; }
     [Space]
-    [SerializeField] private Sprite _sprite;
-    public Sprite Sprite { get => _sprite; }
+    [SerializeField] private Image _image;
+    public Image Image { get => _image; }
+    [SerializeField] private GameObject _placeableGO;
+    public GameObject PlaceableGameObject { get => _placeableGO; }
 }

@@ -9,13 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e33dfb8d70303f45aea88f83f139e84, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e7f87b3bcbe66845a38ecf614e07041, type: 3}
   m_Name: ArmorOfTheDead
   m_EditorClassIdentifier: 
-  _id: 7
+  _id: 3
   _type: 1
-  _name: Amor of the Dead
-  _description: Ancient plate of human king Aestrot, lived in 2nd centuary of Dark
-    Age.
+  _name: Armor of the Dead
+  _description: Armor of the ancient human king Angmador, cursed by the goddes Aliene
+    for his crimes.
   _weight: 40
+  _image: {fileID: 8337231607918984445, guid: 5b867215edcf1d240a17968205937753, type: 3}
+  _placeableGO: {fileID: 8754752899074070216, guid: 4397c978e1486a246a930f5eba356cc6, type: 3}
   _place: 1
+  _armorClass: 6
+  _armorType: 2
