@@ -4862,7 +4862,7 @@ GameObject:
   - component: {fileID: 8393135158415910716}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4894,8 +4894,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7462606378859560266}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: de13a7420582ded45a8d7d3f96889aca, type: 3}
-  m_Controller: {fileID: 9100000, guid: 369341042ff4f464e9d2c852498843bf, type: 2}
+  m_Avatar: {fileID: 9000000, guid: c346a9e2503cda64ba4698db6aa5e707, type: 3}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4915,7 +4915,7 @@ Rigidbody:
   m_GameObject: {fileID: 7462606378859560266}
   serializedVersion: 4
   m_Mass: 75
-  m_Drag: 0
+  m_Drag: 0.1
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -4964,7 +4964,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a2db12ee7c65bb4995084f8c36d8b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_inventoryWindow: {fileID: 0}
 --- !u!81 &2936544628245329743
 AudioListener:
   m_ObjectHideFlags: 0

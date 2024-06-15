@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         _input = FindObjectOfType<InputManager>();
         _cameraRaycast = Camera.main.GetComponent<ViewRaycast>();
         _inventory = GetComponent<Inventory>();
@@ -33,7 +34,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space)) Jump();
         if (Input.GetKeyDown(KeyCode.E)) Action();
-        if (Input.GetKeyDown(KeyCode.I)) _inventory.ShowInventory();
+        if (Input.GetKeyDown(KeyCode.I)) _inventory.UIManager.ShowInventory();
         if (Input.GetKeyDown(KeyCode.F1)) ItemDatabase.ShowDatabase();
     }
 

@@ -15,7 +15,6 @@ public class FPSController : MonoBehaviour
     private void Start()
     {
         _input = FindObjectOfType<InputManager>();
-        Cursor.lockState = CursorLockMode.Locked;
     }
     void Update()
     {

@@ -6,30 +6,19 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] private GameObject m_inventoryWindow;
-
+    public InventoryUIManager UIManager { get => _uIManager; }
+    private InventoryUIManager _uIManager;
     private float _maxWeight = 100;
     private float _curWeight = 0;
     private int _money = 0;
     private List<(AbstractItemInfo, int)> _items = new();
-    private bool m_isOpened = false;
 
-    private TextMeshProUGUI _moneyText;
 
     private void Start()
     {
-        _moneyText = m_inventoryWindow.transform.Find("MoneyText").GetComponent<TextMeshProUGUI>();
-        _moneyText.text = _money.ToString();
-    }
-    public void ShowInventory()
-    {
-        //remove later
-        Debug.Log($"You have {_items.Count} slots with items. You have {_money} gold. Weight {_curWeight}/{_maxWeight}." +
-            $"Item List: {String.Join(", ", _items)}");
-        //
-
-        m_isOpened = !m_isOpened;
-        m_inventoryWindow.SetActive(m_isOpened);
+        _uIManager = FindFirstObjectByType<InventoryUIManager>();
+        UIManager.ChangeMoneyUI(_money);
+        UIManager.ChangeWeightUI(_curWeight, _maxWeight);
     }
 
     public bool AddItem(AbstractItemInfo info, int count)
@@ -38,6 +27,7 @@ public class Inventory : MonoBehaviour
         if (_curWeight + weight <= _maxWeight)
         {
             _curWeight += weight;
+            UIManager.ChangeWeightUI(_curWeight, _maxWeight);
             switch (info.Type)
             {
                 case ItemType.Money:
@@ -85,7 +75,7 @@ public class Inventory : MonoBehaviour
     public void ChangeMoney(int count)
     {
         _money += count;
-        _moneyText.text = _money.ToString();
+        UIManager.ChangeMoneyUI(_money);
     }
 
     private void FillUpInventoryWithSameItem(int count, OtherItemInfo type)
