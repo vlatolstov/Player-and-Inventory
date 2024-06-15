@@ -424,7 +424,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -1922,6 +1922,71 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1373027323
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3737358016606416413, guid: 1b4de3a3705a30f4fab86728543a283c, type: 3}
+      propertyPath: _count
+      value: 25000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737358016606416413, guid: 1b4de3a3705a30f4fab86728543a283c, type: 3}
+      propertyPath: m_count
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343348728205241200, guid: 1b4de3a3705a30f4fab86728543a283c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0873
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343348728205241200, guid: 1b4de3a3705a30f4fab86728543a283c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.0074
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343348728205241200, guid: 1b4de3a3705a30f4fab86728543a283c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.3609
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343348728205241200, guid: 1b4de3a3705a30f4fab86728543a283c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343348728205241200, guid: 1b4de3a3705a30f4fab86728543a283c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343348728205241200, guid: 1b4de3a3705a30f4fab86728543a283c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343348728205241200, guid: 1b4de3a3705a30f4fab86728543a283c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343348728205241200, guid: 1b4de3a3705a30f4fab86728543a283c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343348728205241200, guid: 1b4de3a3705a30f4fab86728543a283c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343348728205241200, guid: 1b4de3a3705a30f4fab86728543a283c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176852813297535129, guid: 1b4de3a3705a30f4fab86728543a283c, type: 3}
+      propertyPath: m_Name
+      value: Coin (8)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1b4de3a3705a30f4fab86728543a283c, type: 3}
 --- !u!1001 &1435597386
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2052,7 +2117,7 @@ GameObject:
   - component: {fileID: 1772187307}
   - component: {fileID: 1772187306}
   m_Layer: 5
-  m_Name: GoldText
+  m_Name: MoneyText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2069,12 +2134,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2083367627}
+  m_Children:
+  - {fileID: 2083367627}
+  m_Father: {fileID: 1936758769}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 64.2, y: -10.3}
+  m_AnchoredPosition: {x: 1.1999817, y: 208.1}
   m_SizeDelta: {x: 88.6, y: 32.1}
   m_Pivot: {x: 0.50000006, y: 0.5}
 --- !u!114 &1772187306
@@ -2204,7 +2270,7 @@ RectTransform:
   m_LocalScale: {x: 0.73625, y: 0.73625, z: 0.73625}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2083367627}
+  - {fileID: 1772187305}
   - {fileID: 514081924}
   m_Father: {fileID: 263976485}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2382,7 +2448,7 @@ GameObject:
   - component: {fileID: 2083367629}
   - component: {fileID: 2083367628}
   m_Layer: 5
-  m_Name: Gold
+  m_Name: Money
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2395,17 +2461,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2083367626}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1772187305}
-  m_Father: {fileID: 1936758769}
+  m_Children: []
+  m_Father: {fileID: 1772187305}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63, y: 218.4}
+  m_AnchoredPosition: {x: -64.19998, y: 10.299973}
   m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2083367628
@@ -3220,6 +3285,7 @@ SceneRoots:
   - {fileID: 714747747}
   - {fileID: 4138418259817294850}
   - {fileID: 1017647583}
+  - {fileID: 1373027323}
   - {fileID: 727586777}
   - {fileID: 783494338}
   - {fileID: 2043510839}

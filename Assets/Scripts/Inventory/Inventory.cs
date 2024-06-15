@@ -1,23 +1,33 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private GameObject m_inventoryWindow;
+
     private float _maxWeight = 100;
     private float _curWeight = 0;
-    private long _money = 0;
+    private int _money = 0;
     private List<(AbstractItemInfo, int)> _items = new();
     private bool m_isOpened = false;
 
+    private TextMeshProUGUI _moneyText;
 
-    //temporary method
+    private void Start()
+    {
+        _moneyText = m_inventoryWindow.transform.Find("MoneyText").GetComponent<TextMeshProUGUI>();
+        _moneyText.text = _money.ToString();
+    }
     public void ShowInventory()
     {
+        //remove later
         Debug.Log($"You have {_items.Count} slots with items. You have {_money} gold. Weight {_curWeight}/{_maxWeight}." +
             $"Item List: {String.Join(", ", _items)}");
+        //
+
         m_isOpened = !m_isOpened;
         m_inventoryWindow.SetActive(m_isOpened);
     }
@@ -31,7 +41,7 @@ public class Inventory : MonoBehaviour
             switch (info.Type)
             {
                 case ItemType.Money:
-                    _money += count;
+                    ChangeMoney(count);
                     Debug.Log($"Picked {count} {info.ItemName}{(count == 1 ? "" : "s")}.");
                     break;
                 case ItemType.Armor:
@@ -68,7 +78,16 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    
+    /// <summary>
+    /// Changes money by count and updates UI representation.
+    /// </summary>
+    /// <param name="count">Negative value if decrease needed.</param>
+    public void ChangeMoney(int count)
+    {
+        _money += count;
+        _moneyText.text = _money.ToString();
+    }
+
     private void FillUpInventoryWithSameItem(int count, OtherItemInfo type)
     {
         var selected = HaveSameIDAndAppropriateCount(type);
