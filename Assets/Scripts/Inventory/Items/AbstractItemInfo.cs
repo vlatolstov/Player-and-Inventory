@@ -19,8 +19,8 @@ public abstract class AbstractItemInfo : ScriptableObject
     [SerializeField] private float _weight;
     public float Weight => _weight;
     [Space]
-    [SerializeField] private Image _image;
-    public Image Image => _image;
+    [SerializeField] private Sprite _sprite;
+    public Sprite Sprite => _sprite;
     [SerializeField] private GameObject _placeableGO;
     public GameObject PlaceableGameObject => _placeableGO;
 }
