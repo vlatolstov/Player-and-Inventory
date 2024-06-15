@@ -32,6 +32,7 @@ public class InventoryUIManager : MonoBehaviour
         _weightText = _inventoryWindow.transform.Find("WeightText").GetComponent<TextMeshProUGUI>();
         _stashObjRef = _inventoryWindow.transform.Find("Stash").GetComponent<GridLayoutGroup>();
 
+        _inventorySlots = new(_inventorySlotsCount);
         Initialize();
     }
 

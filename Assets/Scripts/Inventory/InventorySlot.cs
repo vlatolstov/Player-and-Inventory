@@ -11,6 +11,10 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private AbstractItemInfo _itemInfo;
 
+    private void Awake()
+    {
+        _image = transform.Find("ContentImage").GetComponent<Image>();
+    }
     public void SetItem(AbstractItemInfo item, int count)
     {
         _itemInfo = item;
