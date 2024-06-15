@@ -68,14 +68,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private IList<(int, int)> HaveSameIDAndAppropriateCount(OtherItemInfo item)
-    {
-        return _items
-            .Select((kvp, index) => (kvp.Item1.ID, count: kvp.Item2, index))
-            .Where(triple => triple.ID == item.ID && triple.count < item.MaxStack)
-            .Select(triple => (triple.count, triple.index))
-            .ToList();
-    }
+    
     private void FillUpInventoryWithSameItem(int count, OtherItemInfo type)
     {
         var selected = HaveSameIDAndAppropriateCount(type);
@@ -116,5 +109,13 @@ public class Inventory : MonoBehaviour
             int mod = count % type.MaxStack;
             if (mod > 0) _items.Add((type, mod));
         }
+    }
+    private IList<(int, int)> HaveSameIDAndAppropriateCount(OtherItemInfo item)
+    {
+        return _items
+            .Select((kvp, index) => (kvp.Item1.ID, count: kvp.Item2, index))
+            .Where(triple => triple.ID == item.ID && triple.count < item.MaxStack)
+            .Select(triple => (triple.count, triple.index))
+            .ToList();
     }
 }
