@@ -17,7 +17,7 @@ MonoBehaviour:
   _name: HealingPotion
   _description: Healing potion, restores health by usage.
   _weight: 1
-  _image: {fileID: 7589825750925711552, guid: 01e50742eae4e0643a3a7dd379e9b82d, type: 3}
+  _sprite: {fileID: 21300000, guid: 5c321c12e8030e748ada8c95d13a1122, type: 3}
   _placeableGO: {fileID: 8990857960684620071, guid: 2afc7d12fe97f1145a1ddfecddc9306a, type: 3}
   _stackable: 1
   _maxStack: 12

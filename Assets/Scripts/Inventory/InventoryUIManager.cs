@@ -29,12 +29,22 @@ public class InventoryUIManager : MonoBehaviour
         _playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
 
         _moneyText = _inventoryWindow.transform.Find("MoneyText").GetComponent<TextMeshProUGUI>();
-        _playerInventory.ChangeMoney(0);
         _weightText = _inventoryWindow.transform.Find("WeightText").GetComponent<TextMeshProUGUI>();
         _stashObjRef = _inventoryWindow.transform.Find("Stash").GetComponent<GridLayoutGroup>();
 
         _inventorySlots = new(_inventorySlotsCount);
-        Initialize();
+        InitializeInventoryUI();
+    }
+    private void InitializeInventoryUI()
+    {
+        for (int i = 0; i < _inventorySlotsCount; i++)
+        {
+            var slotObj = Instantiate(_slotPrefab, _stashObjRef.transform);
+            var slot = slotObj.GetComponent<InventorySlot>();
+            _inventorySlots.Add(slot);
+        }
+
+        _playerInventory.ItemAdded += OnItemAdded;
     }
 
     public void ShowInventory()
@@ -55,13 +65,17 @@ public class InventoryUIManager : MonoBehaviour
         _weightText.text = $"Weight: {curValue}/{maxValue}";
     }
 
-    private void Initialize()
+    private void OnItemAdded(AbstractItemInfo item, int count)
     {
-        for (int i = 0; i < _inventorySlotsCount; i++)
+        InventorySlot emptySlot = null;
+        foreach (var slot in _inventorySlots)
         {
-            var slotObj = Instantiate(_slotPrefab, _stashObjRef.transform);
-            var slot = slotObj.GetComponent<InventorySlot>();
-            _inventorySlots.Add(slot);
+            if (slot.ItemInfo == null)
+            {
+                emptySlot = slot;
+                break;
+            }
         }
+        emptySlot.SetItem(item, count);
     }
 }

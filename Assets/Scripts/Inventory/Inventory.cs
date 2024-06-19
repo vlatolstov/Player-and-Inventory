@@ -3,24 +3,47 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
     public InventoryUIManager UIManager { get => _uIManager; }
     private InventoryUIManager _uIManager;
+
+
     private float _maxWeight = 100;
     private float _curWeight = 0;
     private int _money = 0;
+
+    public event Action<AbstractItemInfo, int> ItemAdded;
+
+    public event Action<int, int> ItemRemoved;
+
+
     private List<(AbstractItemInfo, int)> _items = new();
 
 
     private void Start()
     {
         _uIManager = FindFirstObjectByType<InventoryUIManager>();
-        
+        InitializeInventory();
+    }
+    private void InitializeInventory()
+    {
+        UIManager.ChangeMoneyUI(_money);
         UIManager.ChangeWeightUI(_curWeight, _maxWeight);
     }
 
+
+    /// <summary>
+    /// Changes money by count and updates UI representation.
+    /// </summary>
+    /// <param name="count">Negative value if decrease needed.</param>
+    public void ChangeMoney(int count)
+    {
+        _money += count;
+        UIManager.ChangeMoneyUI(_money);
+    }
     public bool AddItem(AbstractItemInfo info, int count)
     {
         float weight = info.Weight * count;
@@ -34,11 +57,13 @@ public class Inventory : MonoBehaviour
                     ChangeMoney(count);
                     Debug.Log($"Picked {count} {info.ItemName}{(count == 1 ? "" : "s")}.");
                     break;
+
                 case ItemType.Armor:
                     ArmorInfo armor = info as ArmorInfo;
-                    _items.Add((armor, 1));
+                    AddToThisInventory(armor, 1);
                     Debug.Log($"Picked {armor.ItemName} with {armor.ArmorClass} AC and {armor.ArmorType} type.");
                     break;
+
                 case ItemType.Miscellaneous:
                     OtherItemInfo item = info as OtherItemInfo;
                     if (item.Stackable)
@@ -49,7 +74,7 @@ public class Inventory : MonoBehaviour
                     {
                         for (int i = 0; i < count; i++)
                         {
-                            _items.Add((item, 1));
+                            AddToThisInventory(item, 1);
                         }
                     }
                     Debug.Log($"Picked {count} {info.ItemName}{(count == 1 ? "" : "s")}.");
@@ -67,17 +92,11 @@ public class Inventory : MonoBehaviour
             return false;
         }
     }
-
-    /// <summary>
-    /// Changes money by count and updates UI representation.
-    /// </summary>
-    /// <param name="count">Negative value if decrease needed.</param>
-    public void ChangeMoney(int count)
+    private void AddToThisInventory(AbstractItemInfo info, int count)
     {
-        _money += count;
-        UIManager.ChangeMoneyUI(_money);
+        _items.Add((info, count));
+        ItemAdded?.Invoke(info, count);
     }
-
     private void FillUpInventoryWithSameItem(int count, OtherItemInfo type)
     {
         var selected = HaveSameIDAndAppropriateCount(type);
@@ -102,10 +121,10 @@ public class Inventory : MonoBehaviour
                 int n = count / type.MaxStack;
                 for (int i = 0; i < n; i++)
                 {
-                    _items.Add((type, type.MaxStack));
+                    AddToThisInventory(type, type.MaxStack);
                 }
                 int mod = count % type.MaxStack;
-                if (mod > 0) _items.Add((type, mod));
+                if (mod > 0) AddToThisInventory(type, mod);
             }
         }
         else
@@ -113,10 +132,10 @@ public class Inventory : MonoBehaviour
             int n = count / type.MaxStack;
             for (int i = 0; i < n; i++)
             {
-                _items.Add((type, type.MaxStack));
+                AddToThisInventory(type, type.MaxStack);
             }
             int mod = count % type.MaxStack;
-            if (mod > 0) _items.Add((type, mod));
+            if (mod > 0) AddToThisInventory(type, mod);
         }
     }
     private IList<(int, int)> HaveSameIDAndAppropriateCount(OtherItemInfo item)
