@@ -13,7 +13,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private AbstractItemInfo _itemInfo;
     public AbstractItemInfo ItemInfo => _itemInfo;
 
-    private void Awake()
+    private void Start()
     {
         _image = transform.Find("ContentImage").GetComponent<Image>();
         _countText = transform.Find("CountText").GetComponent<TextMeshProUGUI>();
