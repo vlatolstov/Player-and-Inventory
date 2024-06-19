@@ -29,6 +29,7 @@ public class InventoryUIManager : MonoBehaviour
         _playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
 
         _moneyText = _inventoryWindow.transform.Find("MoneyText").GetComponent<TextMeshProUGUI>();
+        _playerInventory.ChangeMoney(0);
         _weightText = _inventoryWindow.transform.Find("WeightText").GetComponent<TextMeshProUGUI>();
         _stashObjRef = _inventoryWindow.transform.Find("Stash").GetComponent<GridLayoutGroup>();
 

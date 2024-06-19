@@ -17,7 +17,7 @@ public class Inventory : MonoBehaviour
     private void Start()
     {
         _uIManager = FindFirstObjectByType<InventoryUIManager>();
-        UIManager.ChangeMoneyUI(_money);
+        
         UIManager.ChangeWeightUI(_curWeight, _maxWeight);
     }
 
