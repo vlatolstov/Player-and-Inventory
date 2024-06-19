@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour
     public InventoryUIManager UIManager { get => _uIManager; }
     private InventoryUIManager _uIManager;
 
-    private float _maxWeight = 100;
+    private float _maxWeight = 150;
     private float _curWeight = 0;
     private int _money = 0;
 

@@ -7,17 +7,12 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    private Image _image;
-    private TextMeshProUGUI _countText;
+    [SerializeField] private Image _image;
+    [SerializeField] private TextMeshProUGUI _countText;
 
     private AbstractItemInfo _itemInfo;
     public AbstractItemInfo ItemInfo => _itemInfo;
 
-    private void Start()
-    {
-        _image = transform.Find("ContentImage").GetComponent<Image>();
-        _countText = transform.Find("CountText").GetComponent<TextMeshProUGUI>();
-    }
     public void SetItem(AbstractItemInfo item, int count)
     {
         _itemInfo = item;
