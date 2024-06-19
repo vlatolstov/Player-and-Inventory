@@ -22,7 +22,7 @@ public class InventoryUIManager : MonoBehaviour
     private List<InventorySlot> _inventorySlots;
     private Inventory _playerInventory;
 
-    private void Start()
+    public void InitializeInventoryUI()
     {
         _isOpened = _inventoryCanvas.activeInHierarchy;
         _inventoryWindow = _inventoryCanvas.transform.Find("InventoryWindow").gameObject;
@@ -33,10 +33,7 @@ public class InventoryUIManager : MonoBehaviour
         _stashObjRef = _inventoryWindow.transform.Find("Stash").GetComponent<GridLayoutGroup>();
 
         _inventorySlots = new(_inventorySlotsCount);
-        InitializeInventoryUI();
-    }
-    private void InitializeInventoryUI()
-    {
+
         for (int i = 0; i < _inventorySlotsCount; i++)
         {
             var slotObj = Instantiate(_slotPrefab, _stashObjRef.transform);
@@ -44,7 +41,7 @@ public class InventoryUIManager : MonoBehaviour
             _inventorySlots.Add(slot);
         }
 
-        _playerInventory.ItemAdded += OnItemAdded;
+        _playerInventory.OnInventoryChanged += RefreshUI;
     }
 
     public void ShowInventory()
@@ -65,17 +62,16 @@ public class InventoryUIManager : MonoBehaviour
         _weightText.text = $"Weight: {curValue}/{maxValue}";
     }
 
-    private void OnItemAdded(AbstractItemInfo item, int count)
+    private void RefreshUI(List<(AbstractItemInfo, int)> items)
     {
-        InventorySlot emptySlot = null;
-        foreach (var slot in _inventorySlots)
+        int i = 0;
+        for (; i < items.Count;i++)
         {
-            if (slot.ItemInfo == null)
-            {
-                emptySlot = slot;
-                break;
-            }
+            _inventorySlots[i].SetItem(items[i].Item1, items[i].Item2);
         }
-        emptySlot.SetItem(item, count);
+        for (; i < _inventorySlots.Count; i++)
+        {
+            _inventorySlots[i].ClearSlot();
+        }
     }
 }

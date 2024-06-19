@@ -10,17 +10,13 @@ public class Inventory : MonoBehaviour
     public InventoryUIManager UIManager { get => _uIManager; }
     private InventoryUIManager _uIManager;
 
-
     private float _maxWeight = 100;
     private float _curWeight = 0;
     private int _money = 0;
 
-    public event Action<AbstractItemInfo, int> ItemAdded;
+    public event Action<List<(AbstractItemInfo, int)>> OnInventoryChanged;
 
-    public event Action<int, int> ItemRemoved;
-
-
-    private List<(AbstractItemInfo, int)> _items = new();
+    private List<(AbstractItemInfo, int)> _items = new(56);
 
 
     private void Start()
@@ -30,6 +26,7 @@ public class Inventory : MonoBehaviour
     }
     private void InitializeInventory()
     {
+        UIManager.InitializeInventoryUI();
         UIManager.ChangeMoneyUI(_money);
         UIManager.ChangeWeightUI(_curWeight, _maxWeight);
     }
@@ -84,6 +81,7 @@ public class Inventory : MonoBehaviour
                     Debug.LogError($"{info.Type} not implemented!");
                     return false;
             }
+            OnInventoryChanged?.Invoke(_items);
             return true;
         }
         else
@@ -95,7 +93,6 @@ public class Inventory : MonoBehaviour
     private void AddToThisInventory(AbstractItemInfo info, int count)
     {
         _items.Add((info, count));
-        ItemAdded?.Invoke(info, count);
     }
     private void FillUpInventoryWithSameItem(int count, OtherItemInfo type)
     {
