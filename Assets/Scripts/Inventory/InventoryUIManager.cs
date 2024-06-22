@@ -41,7 +41,7 @@ public class InventoryUIManager : MonoBehaviour
             _inventorySlots.Add(slot);
         }
 
-        _playerInventory.OnInventoryChanged += RefreshUI;
+        _playerInventory.OnInventoryChanged += RefreshStashUI;
     }
 
     public void ShowInventory()
@@ -62,7 +62,7 @@ public class InventoryUIManager : MonoBehaviour
         _weightText.text = $"Weight: {curValue}/{maxValue}";
     }
 
-    private void RefreshUI(List<(AbstractItemInfo, int)> items)
+    private void RefreshStashUI(List<(AbstractItemInfo, int)> items)
     {
         int i = 0;
         for (; i < items.Count;i++)

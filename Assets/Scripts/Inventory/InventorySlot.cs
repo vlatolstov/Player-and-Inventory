@@ -54,7 +54,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-
+        
     }
 
     public void OnPointerExit(PointerEventData eventData)
