@@ -10,15 +10,17 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 {
     [SerializeField] private Image _image;
     [SerializeField] private TextMeshProUGUI _countText;
+    private int _count;
 
     private AbstractItemInfo _itemInfo;
     public AbstractItemInfo ItemInfo => _itemInfo;
 
-    public event Action<AbstractItemInfo, Transform> EPointerEnter;
+    public event Action<AbstractItemInfo, Transform, int> EPointerEnter;
     public event Action EPointerExit;
 
     public void SetItem(AbstractItemInfo item, int count)
     {
+        _count = count;
         _itemInfo = item;
         _image.sprite = item.Sprite;
         _image.gameObject.SetActive(true);
@@ -60,7 +62,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         if (_itemInfo != null)
         {
-            EPointerEnter?.Invoke(_itemInfo, transform);
+            EPointerEnter?.Invoke(_itemInfo, transform, _count);
         }
     }
 

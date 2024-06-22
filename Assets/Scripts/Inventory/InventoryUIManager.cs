@@ -17,6 +17,15 @@ public class InventoryUIManager : MonoBehaviour
     private TextMeshProUGUI _weightText;
     private GridLayoutGroup _stashObjRef;
 
+    private GameObject _infoPanel;
+    private TextMeshProUGUI _info_Name;
+    private TextMeshProUGUI _info_Type;
+    private TextMeshProUGUI _info_Stats;
+    private TextMeshProUGUI _info_Description;
+    private TextMeshProUGUI _info_Count;
+    private TextMeshProUGUI _info_Cost;
+    private TextMeshProUGUI _info_Weight;
+
     private bool _isOpened;
 
     private List<InventorySlot> _inventorySlots;
@@ -27,10 +36,19 @@ public class InventoryUIManager : MonoBehaviour
         _isOpened = _inventoryCanvas.activeInHierarchy;
         _inventoryWindow = _inventoryCanvas.transform.Find("InventoryWindow").gameObject;
         _playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
-
+         
         _moneyText = _inventoryWindow.transform.Find("MoneyText").GetComponent<TextMeshProUGUI>();
         _weightText = _inventoryWindow.transform.Find("WeightText").GetComponent<TextMeshProUGUI>();
         _stashObjRef = _inventoryWindow.transform.Find("Stash").GetComponent<GridLayoutGroup>();
+        
+        _infoPanel = _inventoryWindow.transform.Find("InfoPanel").gameObject;
+        _info_Name = _infoPanel.transform.Find("Name").GetComponent<TextMeshProUGUI>();
+        _info_Type = _infoPanel.transform.Find("Type").GetComponent<TextMeshProUGUI>();
+        _info_Stats = _infoPanel.transform.Find("Stats").GetComponent<TextMeshProUGUI>();
+        _info_Description = _infoPanel.transform.Find("Description").GetComponent<TextMeshProUGUI>();
+        _info_Cost = _infoPanel.transform.Find("Cost").GetComponent<TextMeshProUGUI>();
+        _info_Weight = _infoPanel.transform.Find("Weight").GetComponent<TextMeshProUGUI>();
+        _info_Count = _infoPanel.transform.Find("Count").GetComponent<TextMeshProUGUI>();
 
         _inventorySlots = new(_inventorySlotsCount);
 
@@ -54,13 +72,23 @@ public class InventoryUIManager : MonoBehaviour
         else Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void ShowItemInfo(AbstractItemInfo info, Transform transform)
+    private void ShowItemInfo(AbstractItemInfo info, Transform transform, int count)
     {
-        Debug.Log(info.GetType() + transform.gameObject.ToString());
+        if (info == null) return;
+
+        _info_Name.text = info.ItemName;
+        _info_Type.text = info.Type.ToString();
+        _info_Description.text = info.Description;
+        _info_Cost.text = $"({info.Cost}) {info.Cost * count}";
+        _info_Count.text = $"Count: {count}";
+        var totalWeight = info.Weight * count;
+        _info_Weight.text = $"Weight:({info.Weight}) {totalWeight:F2}";
+        //дописать stats
+        _infoPanel.SetActive(true);
     }
     private void HideItemInfo()
     {
-        Debug.Log("Exit");
+        _infoPanel.gameObject.SetActive(false);
     }
     public void ChangeMoneyUI(int value)
     {
