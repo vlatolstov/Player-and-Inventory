@@ -17,6 +17,7 @@ MonoBehaviour:
   _name: Gold Coin
   _description: hui
   _weight: 0.01
+  _cost: 1
   _sprite: {fileID: 21300000, guid: aa77b6e5f30dc4f59b556738c9f3b348, type: 3}
   _placeableGO: {fileID: 8176852813297535129, guid: 1b4de3a3705a30f4fab86728543a283c, type: 3}
   _stackable: 1

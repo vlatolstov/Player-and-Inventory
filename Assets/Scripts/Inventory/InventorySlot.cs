@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -12,6 +13,9 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private AbstractItemInfo _itemInfo;
     public AbstractItemInfo ItemInfo => _itemInfo;
+
+    public event Action<AbstractItemInfo, Transform> EPointerEnter;
+    public event Action EPointerExit;
 
     public void SetItem(AbstractItemInfo item, int count)
     {
@@ -54,11 +58,17 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        
+        if (_itemInfo != null)
+        {
+            EPointerEnter?.Invoke(_itemInfo, transform);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-
+        if (_itemInfo != null)
+        {
+            EPointerExit?.Invoke();
+        }
     }
 }

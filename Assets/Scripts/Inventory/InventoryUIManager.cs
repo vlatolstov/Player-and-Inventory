@@ -38,6 +38,8 @@ public class InventoryUIManager : MonoBehaviour
         {
             var slotObj = Instantiate(_slotPrefab, _stashObjRef.transform);
             var slot = slotObj.GetComponent<InventorySlot>();
+            slot.EPointerEnter += ShowItemInfo;
+            slot.EPointerExit += HideItemInfo;
             _inventorySlots.Add(slot);
         }
 
@@ -52,6 +54,14 @@ public class InventoryUIManager : MonoBehaviour
         else Cursor.lockState = CursorLockMode.Locked;
     }
 
+    private void ShowItemInfo(AbstractItemInfo info, Transform transform)
+    {
+        Debug.Log(info.GetType() + transform.gameObject.ToString());
+    }
+    private void HideItemInfo()
+    {
+        Debug.Log("Exit");
+    }
     public void ChangeMoneyUI(int value)
     {
         _moneyText.text = value.ToString();

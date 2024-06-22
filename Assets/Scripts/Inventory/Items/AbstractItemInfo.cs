@@ -18,6 +18,8 @@ public abstract class AbstractItemInfo : ScriptableObject
     [Space]
     [SerializeField] private float _weight;
     public float Weight => _weight;
+    [SerializeField] private float _cost;
+    public float Cost => _cost;
     [Space]
     [SerializeField] private Sprite _sprite;
     public Sprite Sprite => _sprite;

@@ -18,6 +18,7 @@ MonoBehaviour:
   _description: Armor of the ancient human king Angmador, cursed by the goddes Aliene
     for his crimes.
   _weight: 40
+  _cost: 6666
   _sprite: {fileID: 21300000, guid: 517e5cbb9a9525340923288d5c951984, type: 3}
   _placeableGO: {fileID: 8754752899074070216, guid: 4397c978e1486a246a930f5eba356cc6, type: 3}
   _place: 1

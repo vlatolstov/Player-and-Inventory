@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c5d392902ee3eaa4fbdb0bf63a4c78eb, type: 3}
-  m_Name: HealingPotion
+  m_Name: TestItem
   m_EditorClassIdentifier: 
-  _id: 1
+  _id: 165
   _type: 2
-  _name: HealingPotion
-  _description: Healing potion, restores health by usage.
+  _name: Test
+  _description: Test
   _weight: 1
-  _cost: 50
-  _sprite: {fileID: 21300000, guid: 5c321c12e8030e748ada8c95d13a1122, type: 3}
-  _placeableGO: {fileID: 6580693329152669720, guid: 1472b1370f0aa4c4eb3652bb5d95ba99, type: 3}
-  _stackable: 1
-  _maxStack: 12
+  _cost: 1
+  _sprite: {fileID: 21300000, guid: 517e5cbb9a9525340923288d5c951984, type: 3}
+  _placeableGO: {fileID: 3084277830064277375, guid: e1b9d4ce3b8b7df42baf17132c58203a, type: 3}
+  _stackable: 0
+  _maxStack: 0
