@@ -15,7 +15,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private AbstractItemInfo _itemInfo;
     public AbstractItemInfo ItemInfo => _itemInfo;
 
-    public event Action<AbstractItemInfo, Transform, int> EPointerEnter;
+    public event Action<AbstractItemInfo, int> EPointerEnter;
     public event Action EPointerExit;
 
     public void SetItem(AbstractItemInfo item, int count)
@@ -62,7 +62,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         if (_itemInfo != null)
         {
-            EPointerEnter?.Invoke(_itemInfo, transform, _count);
+            EPointerEnter?.Invoke(_itemInfo, _count);
         }
     }
 

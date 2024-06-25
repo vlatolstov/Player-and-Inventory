@@ -73,7 +73,7 @@ public class InventoryUIManager : MonoBehaviour
         else Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void ShowItemInfo(AbstractItemInfo info, Transform slotTransform, int count)
+    private void ShowItemInfo(AbstractItemInfo info, int count)
     {
         if (info == null) return;
 
@@ -86,9 +86,10 @@ public class InventoryUIManager : MonoBehaviour
         _info_Weight.text = $"Weight:({info.Weight}) {totalWeight:F2}";
         //дописать stats
 
+        Vector2 cursorPosition = Input.mousePosition;
         _infoPanel.transform.position = new Vector3(
-            slotTransform.position.x + _infoPanelOffset.x, 
-            slotTransform.position.y + _infoPanelOffset.x,
+            cursorPosition.x + _infoPanelOffset.x,
+            cursorPosition.y + _infoPanelOffset.x,
             0);
 
         _infoPanel.SetActive(true);
