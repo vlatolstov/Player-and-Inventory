@@ -10,7 +10,8 @@ public class InventoryUIManager : MonoBehaviour
 {
     [SerializeField] private GameObject _slotPrefab;
     [SerializeField] private GameObject _inventoryCanvas;
-    [SerializeField] private int _inventorySlotsCount = 56;
+    [SerializeField] private int _inventorySlotsCount = 72;
+    [SerializeField] private Vector2 _infoPanelOffset = new();
 
     private GameObject _inventoryWindow;
     private TextMeshProUGUI _moneyText;
@@ -72,7 +73,7 @@ public class InventoryUIManager : MonoBehaviour
         else Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void ShowItemInfo(AbstractItemInfo info, Transform transform, int count)
+    private void ShowItemInfo(AbstractItemInfo info, Transform slotTransform, int count)
     {
         if (info == null) return;
 
@@ -84,6 +85,12 @@ public class InventoryUIManager : MonoBehaviour
         var totalWeight = info.Weight * count;
         _info_Weight.text = $"Weight:({info.Weight}) {totalWeight:F2}";
         //дописать stats
+
+        _infoPanel.transform.position = new Vector3(
+            slotTransform.position.x + _infoPanelOffset.x, 
+            slotTransform.position.y + _infoPanelOffset.x,
+            0);
+
         _infoPanel.SetActive(true);
     }
     private void HideItemInfo()
