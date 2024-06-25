@@ -308,7 +308,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &263976482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -838,8 +838,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _slotPrefab: {fileID: 6568941948639905841, guid: 5c05d200663d84c4bb610e67cb2fd864, type: 3}
   _inventoryCanvas: {fileID: 263976481}
-  _inventorySlotsCount: 56
-  _infoPanelOffset: {x: 0, y: 0}
+  _inventorySlotsCount: 72
+  _infoPanelOffset: {x: -170, y: 0}
 --- !u!4 &634402329
 Transform:
   m_ObjectHideFlags: 0
@@ -2307,6 +2307,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 263976485}
     m_Modifications:
+    - target: {fileID: 1336861851496559307, guid: 605a1d9b022a41640a4c499e16797294, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -216
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336861851496559307, guid: 605a1d9b022a41640a4c499e16797294, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3261143074479864153, guid: 605a1d9b022a41640a4c499e16797294, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2390,6 +2398,14 @@ PrefabInstance:
     - target: {fileID: 4642362902712815759, guid: 605a1d9b022a41640a4c499e16797294, type: 3}
       propertyPath: m_Name
       value: InventoryWindow
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642362902712815759, guid: 605a1d9b022a41640a4c499e16797294, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6294708152459337040, guid: 605a1d9b022a41640a4c499e16797294, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
