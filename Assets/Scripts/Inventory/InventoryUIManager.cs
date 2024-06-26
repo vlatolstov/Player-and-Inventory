@@ -10,7 +10,8 @@ public class InventoryUIManager : MonoBehaviour
 {
     [SerializeField] private GameObject _slotPrefab;
     [SerializeField] private GameObject _inventoryCanvas;
-    [SerializeField] private int _inventorySlotsCount = 56;
+    [SerializeField] private int _inventorySlotsCount = 72;
+    [SerializeField] private Vector2 _infoPanelOffset = new();
 
     private GameObject _inventoryWindow;
     private TextMeshProUGUI _moneyText;
@@ -63,7 +64,17 @@ public class InventoryUIManager : MonoBehaviour
 
         _playerInventory.OnInventoryChanged += RefreshStashUI;
     }
-
+    private void Update()
+    {
+        if (_isOpened)
+        {
+            Vector2 cursorPosition = Input.mousePosition;
+            _infoPanel.transform.position = new Vector3(
+                cursorPosition.x + _infoPanelOffset.x,
+                cursorPosition.y + _infoPanelOffset.x,
+                0);
+        }
+    }
     public void ShowInventory()
     {
         _isOpened = !_isOpened;
@@ -71,8 +82,7 @@ public class InventoryUIManager : MonoBehaviour
         if (_isOpened) Cursor.lockState = CursorLockMode.Confined;
         else Cursor.lockState = CursorLockMode.Locked;
     }
-
-    private void ShowItemInfo(AbstractItemInfo info, Transform transform, int count)
+    private void ShowItemInfo(AbstractItemInfo info, int count)
     {
         if (info == null) return;
 
@@ -84,6 +94,7 @@ public class InventoryUIManager : MonoBehaviour
         var totalWeight = info.Weight * count;
         _info_Weight.text = $"Weight:({info.Weight}) {totalWeight:F2}";
         //дописать stats
+
         _infoPanel.SetActive(true);
     }
     private void HideItemInfo()
@@ -94,12 +105,10 @@ public class InventoryUIManager : MonoBehaviour
     {
         _moneyText.text = value.ToString();
     }
-
     public void ChangeWeightUI(float curValue, float maxValue)
     {
         _weightText.text = $"Weight: {curValue}/{maxValue}";
     }
-
     private void RefreshStashUI(List<(AbstractItemInfo, int)> items)
     {
         int i = 0;
