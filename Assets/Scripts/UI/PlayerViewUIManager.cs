@@ -9,13 +9,13 @@ public class PlayerViewUIManager : MonoBehaviour
     [SerializeField] Canvas _playerViewCanvas;
 
     private Inventory _playerInventory;
-    private VerticalLayoutGroup _messages;
+    private GridLayoutGroup _messages;
 
     void Start()
     {
         _playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         _playerInventory.OnPickupItem += ShowPickUpMessage;
-        _messages = _playerViewCanvas.transform.Find("Messages").GetComponent<VerticalLayoutGroup>();
+        _messages = _playerViewCanvas.transform.Find("Messages").GetComponent<GridLayoutGroup>();
     }
 
     private void ShowPickUpMessage(string message, Sprite itemSprite)

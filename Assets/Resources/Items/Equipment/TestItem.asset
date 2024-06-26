@@ -16,7 +16,7 @@ MonoBehaviour:
   _type: 2
   _name: Test
   _description: Test
-  _weight: 1
+  _weight: 50
   _cost: 1
   _sprite: {fileID: 21300000, guid: 517e5cbb9a9525340923288d5c951984, type: 3}
   _placeableGO: {fileID: 3084277830064277375, guid: e1b9d4ce3b8b7df42baf17132c58203a, type: 3}
