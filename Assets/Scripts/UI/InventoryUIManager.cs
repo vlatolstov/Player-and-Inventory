@@ -99,7 +99,7 @@ public class InventoryUIManager : MonoBehaviour
     }
     private void HideItemInfo()
     {
-        _infoPanel.gameObject.SetActive(false);
+        _infoPanel.SetActive(false);
     }
     public void ChangeMoneyUI(int value)
     {
