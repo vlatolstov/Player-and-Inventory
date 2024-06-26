@@ -5,58 +5,55 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public InventoryUIManager UIManager { get => _uIManager; }
-    private InventoryUIManager _uIManager;
+    public InventoryUIManager InventoryUIManager { get => _inventoryUIManager; }
+    private InventoryUIManager _inventoryUIManager;
 
     private float _maxWeight = 150;
     private float _curWeight = 0;
     private int _money = 0;
 
     public event Action<List<(AbstractItemInfo, int)>> OnInventoryChanged;
+    public event Action<string, Sprite> OnPickupItem;
 
     private List<(AbstractItemInfo, int)> _items = new(56);
 
 
     private void Start()
     {
-        _uIManager = FindFirstObjectByType<InventoryUIManager>();
+        _inventoryUIManager = FindFirstObjectByType<InventoryUIManager>();
         InitializeInventory();
     }
     private void InitializeInventory()
     {
-        UIManager.InitializeInventoryUI();
-        UIManager.ChangeMoneyUI(_money);
-        UIManager.ChangeWeightUI(_curWeight, _maxWeight);
+        InventoryUIManager.InitializeInventoryUI();
+        InventoryUIManager.ChangeMoneyUI(_money);
+        InventoryUIManager.ChangeWeightUI(_curWeight, _maxWeight);
     }
 
-
-    /// <summary>
-    /// Changes money by count and updates UI representation.
-    /// </summary>
-    /// <param name="count">Negative value if decrease needed.</param>
     public void ChangeMoney(int count)
     {
         _money += count;
-        UIManager.ChangeMoneyUI(_money);
+        InventoryUIManager.ChangeMoneyUI(_money);
     }
     public bool AddItem(AbstractItemInfo info, int count)
     {
         float weight = info.Weight * count;
+        string message;
         if (_curWeight + weight <= _maxWeight)
         {
             _curWeight += weight;
-            UIManager.ChangeWeightUI(_curWeight, _maxWeight);
+            InventoryUIManager.ChangeWeightUI(_curWeight, _maxWeight);
             switch (info.Type)
             {
                 case ItemType.Money:
                     ChangeMoney(count);
-                    Debug.Log($"Picked {count} {info.ItemName}{(count == 1 ? "" : "s")}.");
+                    message = $"Picked {count} {info.ItemName}{(count == 1 ? "" : "s")}.";
                     break;
 
                 case ItemType.Armor:
                     ArmorInfo armor = info as ArmorInfo;
                     AddToThisInventory(armor, 1);
-                    Debug.Log($"Picked {armor.ItemName} with {armor.ArmorClass} AC and {armor.ArmorType} type.");
+                    message = $"Picked {armor.ItemName}";
                     break;
 
                 case ItemType.Miscellaneous:
@@ -72,19 +69,22 @@ public class Inventory : MonoBehaviour
                             AddToThisInventory(item, 1);
                         }
                     }
-                    Debug.Log($"Picked {count} {info.ItemName}{(count == 1 ? "" : "s")}.");
+                    message = $"Picked {count} {info.ItemName}{(count == 1 ? "" : "s")}.";
                     break;
-
                 default:
-                    Debug.LogError($"{info.Type} not implemented!");
+                    message = $"{info.Type} not implemented!";
                     return false;
             }
             OnInventoryChanged?.Invoke(_items);
+            OnPickupItem?.Invoke(message, info.Sprite);
+            Debug.Log(message);
             return true;
         }
         else
         {
-            Debug.LogWarning("Cant pickup! Too heavy!");
+            message = "Cant pickup! Too heavy!";
+            OnPickupItem?.Invoke(message, null);
+            Debug.Log(message);
             return false;
         }
     }

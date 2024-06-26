@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space)) Jump();
         if (Input.GetKeyDown(KeyCode.E)) Action();
-        if (Input.GetKeyDown(KeyCode.I)) _inventory.UIManager.ShowInventory();
+        if (Input.GetKeyDown(KeyCode.I)) _inventory.InventoryUIManager.ShowInventory();
         if (Input.GetKeyDown(KeyCode.F1)) ItemDatabase.ShowDatabase();
     }
 
